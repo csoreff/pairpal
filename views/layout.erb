@@ -2,26 +2,36 @@
 <html>
 <head>
   <title>Pair Pals</title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
   <link rel="stylesheet" href="/css/layout.css">
 </head>
   <body>
     <div id="header">
-      <img src="/collaboration.png" alt="Collaborators" />
-      <div>
-        <form action="/pairings" method="post">
-          <label for="name" />
-          <input
-            type="text"
-            id="name"
-            name="name"
-            maxlength="50"
-            required />
-          <input type="submit" value="Add" />
-        </form>
+      <div id="header_content">
+        <div class="image_header">
+          <img src="/launch_academy_logo.png" alt="Launch Academy Logo" />
+          <span>
+            require 'Pair Pal'
+          </span>
+        </div>
+        <!-- <div>
+          <form action="/pairings" method="post">
+            <label for="name" />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              maxlength="50"
+              required />
+            <input type="submit" value="Add" />
+          </form>
+        </div> -->
       </div>
     </div>
     <div id="master_container">
       <%= yield %>
     </div>
+
+    <script source="/js/boostrap.min.js" type="text/javascript"></script>
   </body>
 </html>

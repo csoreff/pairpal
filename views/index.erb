@@ -1,0 +1,46 @@
+<div class="page_header">
+  <img src="/user.png" alt="Daily Users" />
+  <h1>Find Me a Pair Pal!</h1>
+  <p class="lead">
+    It didn't look too bad...
+  </p>
+</div>
+
+<div class="container">
+  <div id="daily_users_container">
+    <% @daily_users.each do |user| %>
+      <div class="daily_users" style="float:left">
+        <img src="/danelson.jpg" alt="Danelson Rosa" class="img-circle" />
+        <p class="lead">
+          <%= user["first_name"] %>
+          <%= user["last_name"] %>
+          <% if user["type"] == 'Afternoon' %>
+            (A)
+          <% elsif user["type"] == 'Evening' %>
+            (E)
+          <% else %>
+            (O)
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div class="page_header">
+  <img src="/collaboration.png" alt="Collaborators" />
+  <h1>Pairings</h1>
+  <p class="lead">
+    Badasses unite!
+  </p>
+</div>
+
+<div class="container">
+  <div id="daily_users_container">
+    <% @pairings.each do |pair| %>
+      <%= pair %><br/>  
+    <% end %>
+  </div>
+  <div class="clear"></div>
+</div>
