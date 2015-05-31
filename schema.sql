@@ -48,6 +48,18 @@ VALUES ('John', 'Doe')
 INSERT INTO users (first_name, last_name)
 VALUES ('Jane', 'Doe')
 ;
+INSERT INTO users (first_name, last_name)
+VALUES ('Julian', 'Bashir')
+;
+INSERT INTO users (first_name, last_name)
+VALUES ('Siri', 'Apul')
+;
+INSERT INTO users (first_name, last_name)
+VALUES ('Bic', 'Mitchum')
+;
+INSERT INTO users (first_name, last_name)
+VALUES ('Mike', 'Lowry')
+;
 
 INSERT INTO preferences (type)
 VALUES ('Afternoon')
@@ -57,4 +69,51 @@ VALUES ('Evening')
 ;
 INSERT INTO preferences (type)
 VALUES ('Other')
+;
+
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('1', '1')
+;
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('6', '1')
+;
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('2', '2')
+;
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('5', '2')
+;
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('3', '3')
+;
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('4', '3')
+;
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('7', '3')
+;
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('8', '2')
+;
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('9', '1')
+;
+INSERT INTO daily_users (user_id, preference_id)
+VALUES ('10', '2')
+;
+
+INSERT INTO pairings (first_user_id, second_user_id, preference_id, day)
+VALUES (1, 6, 1, '5/31/15')
+;
+INSERT INTO pairings (first_user_id, second_user_id, preference_id, day)
+VALUES (2, 5, 2, '5/31/15')
+;
+INSERT INTO pairings (first_user_id, second_user_id, preference_id, day)
+VALUES (3, 4, 3, '5/31/15')
+;
+INSERT INTO pairings (first_user_id, second_user_id, preference_id, day)
+VALUES (7, 8, 4, '5/31/15')
+;
+INSERT INTO pairings (first_user_id, second_user_id, preference_id, day)
+VALUES (9, 10, 3, '5/31/15')
 ;
