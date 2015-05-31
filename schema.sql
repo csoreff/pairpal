@@ -2,7 +2,8 @@ DROP TABLE IF EXISTS
   users,
   daily_users,
   preferences,
-  pairings;
+  pairings
+;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -28,3 +29,32 @@ CREATE TABLE pairings (
   preference_id INT,
   day DATE
 );
+
+INSERT INTO users (first_name, last_name)
+VALUES ('Kevin', 'Larrabee')
+;
+INSERT INTO users (first_name, last_name)
+VALUES ('Danelson', 'Rosa')
+;
+INSERT INTO users (first_name, last_name)
+VALUES ('Eiyre', 'Cat')
+;
+INSERT INTO users (first_name, last_name)
+VALUES ('Jose', 'Cuervo')
+;
+INSERT INTO users (first_name, last_name)
+VALUES ('John', 'Doe')
+;
+INSERT INTO users (first_name, last_name)
+VALUES ('Jane', 'Doe')
+;
+
+INSERT INTO preferences (type)
+VALUES ('Afternoon')
+;
+INSERT INTO preferences (type)
+VALUES ('Evening')
+;
+INSERT INTO preferences (type)
+VALUES ('Other')
+;
