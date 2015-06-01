@@ -50,4 +50,3 @@ INSERT INTO daily_users(user_id, preference_id) VALUES (6, 1);
 INSERT INTO daily_users(user_id, preference_id) VALUES (7, 3);
 INSERT INTO daily_users(user_id, preference_id) VALUES (8, 1);
 INSERT INTO daily_users(user_id, preference_id) VALUES (9, 1);
-
