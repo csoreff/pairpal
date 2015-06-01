@@ -34,20 +34,20 @@ def daily_users
   ", "exec", nil)
 end
 
-
 def pairings
-  # Doesn't include all pairings for some reason
   sql("
     SELECT
-      users_first.first_name,
-      users_first.last_name,
-      users_second.first_name,
-      users_second.last_name,
+      pairings.id,
+      users_first.first_name AS first_first_name,
+      users_first.last_name AS first_last_name,
+      users_second.first_name AS second_first_name,
+      users_second.last_name AS second_last_name,
       preferences.type
     FROM pairings
     JOIN users AS users_first ON users_first.id = pairings.first_user_id
     JOIN users AS users_second ON users_second.id = pairings.second_user_id
     JOIN preferences ON preferences.id = pairings.preference_id
+    ORDER BY preferences.type
   ", "exec", nil)
 end
 
