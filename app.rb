@@ -7,20 +7,10 @@ require_relative 'helpers'
 DBNAME = 'pairpals'
 
 get "/" do
-  erb :index, locals: {}
-end
-
-get '/show' do
-  # # Allow get access only when necessary
-  # unless time_to_pair?
-  #   redirect '/'
-  # end
-
-  unless paired?
+  if !paired? #&& time_to_pair?
     set_pairings
   end
-
-  erb :show, locals: {}
+  erb :index, locals: {}
 end
 
 # Uncomment to automatically create a local db and populate with sample records.

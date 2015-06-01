@@ -36,6 +36,10 @@ INSERT INTO users (first_name, last_name) VALUES ('Eiyre', 'Cat');
 INSERT INTO users (first_name, last_name) VALUES ('Jose', 'Cuervo');
 INSERT INTO users (first_name, last_name) VALUES ('John', 'Doe');
 INSERT INTO users (first_name, last_name) VALUES ('Jane', 'Doe');
+INSERT INTO users (first_name, last_name) VALUES ('Jane', 'Doe');
+INSERT INTO users (first_name, last_name) VALUES ('Jane', 'Doe');
+INSERT INTO users (first_name, last_name) VALUES ('Jane', 'Doe');
+INSERT INTO users (first_name, last_name) VALUES ('Jane', 'Doe');
 
 INSERT INTO preferences (type) VALUES ('Afternoon');
 INSERT INTO preferences (type) VALUES ('Evening');
