@@ -30,31 +30,24 @@ CREATE TABLE pairings (
   day DATE
 );
 
-INSERT INTO users (first_name, last_name)
-VALUES ('Kevin', 'Larrabee')
-;
-INSERT INTO users (first_name, last_name)
-VALUES ('Danelson', 'Rosa')
-;
-INSERT INTO users (first_name, last_name)
-VALUES ('Eiyre', 'Cat')
-;
-INSERT INTO users (first_name, last_name)
-VALUES ('Jose', 'Cuervo')
-;
-INSERT INTO users (first_name, last_name)
-VALUES ('John', 'Doe')
-;
-INSERT INTO users (first_name, last_name)
-VALUES ('Jane', 'Doe')
-;
+INSERT INTO users (first_name, last_name) VALUES ('Kevin', 'Larrabee');
+INSERT INTO users (first_name, last_name) VALUES ('Danelson', 'Rosa');
+INSERT INTO users (first_name, last_name) VALUES ('Eiyre', 'Cat');
+INSERT INTO users (first_name, last_name) VALUES ('Jose', 'Cuervo');
+INSERT INTO users (first_name, last_name) VALUES ('John', 'Doe');
+INSERT INTO users (first_name, last_name) VALUES ('Jane', 'Doe');
 
-INSERT INTO preferences (type)
-VALUES ('Afternoon')
-;
-INSERT INTO preferences (type)
-VALUES ('Evening')
-;
-INSERT INTO preferences (type)
-VALUES ('Other')
-;
+INSERT INTO preferences (type) VALUES ('Afternoon');
+INSERT INTO preferences (type) VALUES ('Evening');
+INSERT INTO preferences (type) VALUES ('Other');
+
+INSERT INTO daily_users(user_id, preference_id) VALUES (1, 1);
+INSERT INTO daily_users(user_id, preference_id) VALUES (2, 2);
+INSERT INTO daily_users(user_id, preference_id) VALUES (3, 3);
+INSERT INTO daily_users(user_id, preference_id) VALUES (4, 1);
+INSERT INTO daily_users(user_id, preference_id) VALUES (5, 2);
+INSERT INTO daily_users(user_id, preference_id) VALUES (6, 1);
+INSERT INTO daily_users(user_id, preference_id) VALUES (7, 3);
+INSERT INTO daily_users(user_id, preference_id) VALUES (8, 1);
+INSERT INTO daily_users(user_id, preference_id) VALUES (9, 1);
+
