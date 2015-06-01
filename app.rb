@@ -4,6 +4,7 @@ require 'pry'
 
 require_relative 'helpers'
 
+
 DBNAME = 'pairpals'
 
 get "/" do
