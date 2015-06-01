@@ -1,11 +1,5 @@
 body {
-  padding: 0;
-  margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.1em;
-}
-#master_container {
-  background: #FFF;
 }
 #header {
   font-size: 18px;
@@ -36,7 +30,7 @@ body {
   display: inline-block;
   vertical-align: middle;
 }
-#daily_users_container {
+.section_containers {
   margin-bottom: 115px;
   padding-top: 115px;
 }
@@ -44,9 +38,6 @@ body {
   float: left;
   padding: 30px;
   text-align: center;
-}
-img {
-  vertical-align: middle;
 }
 a {
   text-decoration: none;
@@ -60,26 +51,10 @@ a:hover {
 h1{
   color: #FFF;
 }
-input{
-  border: 1px solid #ed197b;
-  border-radius: 8px;
-  font-size: 1.1em;
-  color: #ed197b;
-}
-input:first-child{
-  height: 26px;
-}
-input:last-child{
-  border: 1px solid ;
-  background: #FFF;
-}
-.delete {
-  color: #F2F2F2;
-}
-#letter{
-  color: #000;
-}
 .clear {
   clear: both;
   margin-bottom: 100px;
+}
+.center {
+  text-align: center;
 }
