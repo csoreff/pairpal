@@ -1,6 +1,6 @@
 require 'pg'
 
-system('ruby db_reset.rb')
+#system('ruby db_reset.rb')
 
 def db
   begin
@@ -11,6 +11,9 @@ def db
   end
 end
 
+def current_day
+  Time.now.to_s.slice(0..9)
+end
 
 def get_preference_groups
   db do |conn|
@@ -66,3 +69,11 @@ def set_pairings
 
   add_pairing('3', remaining[-1], 0) if remaining.count.odd?
 end
+
+def paired?
+  db do |conn|
+    conn.exec("SELECT day FROM pairings WHERE day = '#{current_day}'").count > 0
+  end
+end
+
+puts paired?
