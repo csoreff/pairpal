@@ -2,25 +2,40 @@
   <img src="/user.png" alt="Daily Users" />
   <h1>Find Me a Pair Pal!</h1>
   <p class="lead">
-    It didn't look too bad...
+    #DLTB: (it) didn't look too bad...
+    <div>
+      <form action="/pairings" method="post">
+        <label for="name" />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          maxlength="50"
+          placeholder="enter your name"
+          required />
+        <input class="btn btn-lg btn-default" type="submit" value="Add" />
+      </form>
+    </div>
   </p>
 </div>
 
 <div class="container">
-  <div id="daily_users_container">
+  <div class="section_containers">
     <% daily_users.each do |user| %>
-      <div class="daily_users" style="float:left">
-        <img src="/danelson.jpg" alt="Danelson Rosa" class="img-circle" />
+      <div class="daily_users">
+        <img src="/danelson.jpg" alt="Danelson Rosa" class="img-circle img-responsive" />
         <p class="lead">
           <%= user["first_name"] %>
           <%= user["last_name"] %>
-          <% if user["type"] == 'Afternoon' %>
-            (A)
-          <% elsif user["type"] == 'Evening' %>
-            (E)
-          <% else %>
-            (O)
-          <% end %>
+          <small>
+            <% if user["type"] == 'Afternoon' %>
+              (a)
+            <% elsif user["type"] == 'Evening' %>
+              (b)
+            <% else %>
+              (c)
+            <% end %>
+          </small>
         </p>
       </div>
     <% end %>
@@ -37,10 +52,27 @@
 </div>
 
 <div class="container">
-  <div id="daily_users_container">
+  <div class="section_containers lead center">
     <% pairings.each do |pair| %>
-      <%= pair %><br/>  
+      <div style="float: left;">
+        <img src="/kevin.jpg" alt="Kevin Larrabee" class="img-circle img-responsive" />
+        <br/>
+        <%= pair["first_first_name"] %> <%= pair["first_last_name"] %>
+      </div>
+
+      <div style="float: left;">
+          <small><%= pair["type"].downcase %></small>
+          <br/>
+          <img src="/double_arrow.png" class ="img-responsive" alt="Double arrow" />
+      </div>
+
+      <div style="float: left;">
+        <img src="/kevin.jpg" alt="Kevin Larrabee" class="img-circle img-responsive" />
+        <br/>
+        <%= pair["second_first_name"] %> <%= pair["second_last_name"] %>
+      </div>
+      <div class="clear"></div>
     <% end %>
+    <div class="clear"></div>
   </div>
-  <div class="clear"></div>
 </div>
