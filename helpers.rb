@@ -1,13 +1,27 @@
 ### WRAPPER methods
 
 def db
-  begin
-    connection = PG.connect(dbname: DBNAME)
-    yield(connection)
-  rescue
-    connection.close
-  end
-end
+   connection_settings = { dbname: ENV["DATABASE_NAME"] || DBNAME }
+
+   if ENV["DATABASE_HOST"]
+     connection_settings[:host] = ENV["DATABASE_HOST"]
+   end
+
+   if ENV["DATABASE_USER"]
+     connection_settings[:user] = ENV["DATABASE_USER"]
+   end
+
+   if ENV["DATABASE_PASS"]
+     connection_settings[:password] = ENV["DATABASE_PASS"]
+   end
+
+   begin
+     connection = PG.connect(connection_settings)
+     yield(connection)
+   ensure
+     connection.close
+   end
+ end
 
 def exec(sql)
   db {|conn| conn.exec(sql)}
