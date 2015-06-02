@@ -35,14 +35,14 @@ def current_day
 end
 
 def time_to_pair?
-  t = Time.now
-  t.hour >= 11 && t.min >= 30
+  # t = Time.now
+  # t.hour >= 11 && t.min >= 30
   true
 end
 
 def time_to_post?
-  t = Time.now
-  t.hour <= 11 && t.min < 30
+  # t = Time.now
+  # t.hour <= 11 && t.min < 30
   true
 end
 
@@ -127,11 +127,17 @@ def set_pairings
     add_pairing('3', remaining[x], remaining[x+1])
   end
 
-  add_pairing('3', remaining[-1], 0) if remaining.count.odd?
+  # Uncomment below to add the remaining odd user
+  # to pairings table by 'themselves' (ie paired with null user)
+  # add_pairing('3', remaining[-1], 0) if remaining.count.odd?
 end
 
 def clear_pairings
   sql("DELETE FROM pairings", "exec", nil)
+end
+
+def clear_daily_users
+  sql("DELETE FROM daily_users", "exec", nil)
 end
 
 def pairings
