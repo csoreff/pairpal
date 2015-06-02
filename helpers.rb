@@ -9,6 +9,14 @@ def db
   end
 end
 
+def exec(sql)
+  db {|conn| conn.exec(sql)}
+end
+
+def exec_params(sql, vals)
+  db {|conn| conn.exec_params(sql, vals)}
+end
+
 def sql(statement, exec_type, array_items)
   db do |conn|
     if exec_type == "exec"
@@ -27,27 +35,55 @@ def current_day
 end
 
 def time_to_pair?
-  time = Time.now
-  time.hour.between?(12, 14)
+  #Time.now.hour >= 12
+  false
+end
+
+def time_to_post?
+  #Time.now.hour < 12
+  true
 end
 
 def paired?
-  # If database contains pairing for current day,
-  # daily_users have already been paired
-  db do |conn|
-    conn.exec("
-      SELECT day FROM pairings WHERE day = '#{current_day}'
-      ").count > 0
-  end
+  exec_params("SELECT day FROM pairings WHERE day = $1", [current_day]).count > 0
 end
 
 
 ### DATABASE I/O
 
+def add_user(first_name, last_name)
+  exec_params("INSERT INTO users (first_name, last_name) VALUES ($1, $2)",
+    [first_name, last_name])
+end
+
+def user_exists?(first_name, last_name)
+  exec_params("SELECT id FROM users WHERE first_name ILIKE $1 AND last_name ILIKE $2",
+    [first_name, last_name]).count > 0
+end
+
+def daily_user_exists?(user_id)
+  exec_params("SELECT user_id FROM daily_users WHERE user_id = $1", [user_id]).count > 0
+end
+
+def get_user_id(first_name, last_name)
+  exec_params("SELECT id FROM users WHERE first_name ILIKE $1 AND last_name ILIKE $2",
+    [first_name, last_name])[0]["id"]
+end
+
+def get_preference_id(preference)
+  id = exec_params("SELECT id FROM preferences WHERE type ILIKE $1", [preference])
+  id[0]["id"]
+end
+
+def add_daily_user(user_id, pref_id)
+  exec_params("
+    INSERT INTO daily_users (user_id, preference_id)
+    VALUES ($1, $2)", [user_id, pref_id])
+end
+
 def daily_users
   sql("
-    SELECT *
-    FROM daily_users
+    SELECT * FROM daily_users
     JOIN users ON users.id = daily_users.user_id
     JOIN preferences ON preferences.id = daily_users.preference_id
   ", "exec", nil)
@@ -109,4 +145,18 @@ def pairings
     JOIN preferences ON preferences.id = pairings.preference_id
     ORDER BY preferences.type
   ", "exec", nil)
+
+  # sql("
+  #   SELECT
+  #     users_first.first_name AS first_first_name,
+  #     users_first.last_name AS first_last_name,
+  #     users_second.first_name AS second_first_name,
+  #     users_second.last_name AS second_last_name,
+  #     preferences.type
+  #   FROM pairings
+  #     LEFT JOIN users AS users_first ON users_first.id = pairings.first_user_id
+  #     LEFT JOIN users AS users_second ON users_second.id = pairings.second_user_id
+  #     LEFT JOIN preferences ON preferences.id = pairings.preference_id
+  #   ORDER BY preferences.type
+  # ", "exec", nil)
 end

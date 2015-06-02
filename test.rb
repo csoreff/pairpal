@@ -1,79 +1,50 @@
 require 'pg'
+require './helpers'
 
-#system('ruby db_reset.rb')
+DBNAME = 'pairpals'
 
 def db
   begin
-    connection = PG.connect(dbname: 'pairpals')
+    connection = PG.connect(dbname: DBNAME)
     yield(connection)
   rescue
     connection.close
   end
 end
 
-def current_day
-  Time.now.to_s.slice(0..9)
+def exec(sql)
+  db {|conn| conn.exec(sql)}
 end
 
-def get_preference_groups
-  db do |conn|
-    conn.exec("
-      SELECT preference_id, user_id FROM daily_users
-      ORDER BY preference_id
-      ")
-  end  
+def exec_params(sql, vals)
+  db {|conn| conn.exec_params(sql, vals)}
 end
 
-def sql(statement, exec_type, array_items)
-  db_connection do |conn|
-    if exec_type == "exec"
-      conn.exec(statement)
-    else
-      conn.exec_params(statement, array_items)
-    end
-  end
+def user_exists?(first_name, last_name)
+  exec_params("SELECT id FROM users WHERE first_name ILIKE $1 AND last_name ILIKE $2",
+    [first_name, last_name]).count > 0
 end
 
-def add_pairing(pref, first_user, second_user)
-  day = Time.now.to_s.slice(0..9)
-
-  db do |conn|
-    conn.exec("
-      INSERT INTO pairings (first_user_id, second_user_id, preference_id, day)
-      VALUES ('#{first_user}', '#{second_user}', '#{pref}', '#{day}')
-      ")
-  end
+def get_user_id(first_name, last_name)
+  exec_params("SELECT id FROM users WHERE first_name ILIKE $1 AND last_name ILIKE $2",
+    [first_name, last_name])[0]["id"]
 end
 
-def set_pairings
-  groups = { "1" => [], "2" => [], "3" => [] }
-
-  get_preference_groups.each do |user|
-    groups[user["preference_id"]] << user["user_id"]
-  end
-
-  remaining = []
-
-  groups.each do |pref_id, group|
-    group.shuffle!
-    remaining << group.pop if group.count.odd?
-
-    (0...group.length).step(2) do |x|
-      add_pairing(pref_id, group[x], group[x+1])
-    end
-  end
-
-  (0...remaining.length).step(2) do |x|
-    add_pairing('3', remaining[x], remaining[x+1])
-  end
-
-  add_pairing('3', remaining[-1], 0) if remaining.count.odd?
+def daily_user_exists?(user_id)
+  exec_params("SELECT user_id FROM daily_users WHERE user_id = $1", [user_id]).count > 0
 end
 
-def paired?
-  db do |conn|
-    conn.exec("SELECT day FROM pairings WHERE day = '#{current_day}'").count > 0
-  end
+def add_user(first_name, last_name)
+  exec_params("INSERT INTO users (first_name, last_name) VALUES ($1, $2)",
+    [first_name, last_name])
 end
 
-puts paired?
+add_user('kevin', 'larrabee')
+
+puts exec_params("SELECT day FROM pairings WHERE day = $1", [current_day]).count > 0
+
+# puts user_exists?('kevin', 'beeere')
+puts get_user_id('first name', 'last name')
+puts daily_user_exists?(8)
+# puts get_preference_id('daily')
+

@@ -1,20 +1,34 @@
 require 'sinatra'
 require 'pg'
-require 'pry'
-
-require_relative 'helpers'
-
+require './helpers'
 
 DBNAME = 'pairpals'
 
-get "/" do
-  if !paired? # && time_to_pair?
+get '/' do
+  if time_to_pair? && !paired?
     set_pairings
   end
   erb :index, locals: {}
 end
 
-# Uncomment to automatically create a local db and populate with sample records.
+post '/submit' do
+  if time_to_post?
+    first_name = params["first_name"]
+    last_name = params["last_name"]
 
-# system("createdb #{DBNAME}")
-# system("psql #{DBNAME} < schema.sql")
+    add_user(first_name, last_name) unless user_exists?(first_name, last_name)
+
+    pref = params["project_preference"]
+
+    user_id = get_user_id(first_name, last_name)
+    pref_id = get_preference_id(pref)
+
+    if daily_user_exists?(user_id)
+      # flash a warning
+    else
+      add_daily_user(user_id, pref_id)
+    end
+  end
+
+  redirect '/'
+end
