@@ -5,7 +5,8 @@ require './helpers'
 DBNAME = 'pairpals'
 
 get '/' do
-  if time_to_pair? && !paired?
+  if time_to_pair? #&& !paired?
+    clear_pairings # test function - not to use with paired?
     set_pairings
   end
   erb :index, locals: {}

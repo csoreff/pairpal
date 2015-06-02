@@ -35,12 +35,14 @@ def current_day
 end
 
 def time_to_pair?
-  #Time.now.hour >= 12
-  false
+  t = Time.now
+  t.hour >= 11 && t.min >= 30
+  true
 end
 
 def time_to_post?
-  #Time.now.hour < 12
+  t = Time.now
+  t.hour <= 11 && t.min < 30
   true
 end
 
@@ -126,6 +128,10 @@ def set_pairings
   end
 
   add_pairing('3', remaining[-1], 0) if remaining.count.odd?
+end
+
+def clear_pairings
+  sql("DELETE FROM pairings", "exec", nil)
 end
 
 def pairings

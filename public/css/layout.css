@@ -38,6 +38,7 @@ body {
   float: left;
   padding: 30px;
   text-align: center;
+  width: 175px;
 }
 a {
   text-decoration: none;
@@ -57,4 +58,7 @@ h1{
 }
 .center {
   text-align: center;
+}
+.default-launcher-pic {
+  border: 3px solid rgb(61, 158, 198);
 }

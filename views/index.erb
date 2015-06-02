@@ -1,17 +1,17 @@
-<% if time_to_post? %>
+<% if time_to_post? %><% end %>
 
   <div class="page_header">
     <img src="/user.png" alt="Daily Users" />
     <h1>Find Me a Pair Pal!</h1>
     <p class="lead">
-      #DLTB: (it) doesn't look too bad...
+      #DLTB: doesn't look too bad...
       <div>
         <form action="/submit" method="post">
           <fieldset>
-            <input type="text" name="first_name" value="first name"
-              id="first-name-input" maxlength="50" required />
-            <input type="text" name="last_name" value="last name"
-              id="last-name-input" maxlength="50" required />
+            <input type="text" name="first_name"
+              id="first-name-input" maxlength="50" placeholder="first name" required />
+            <input type="text" name="last_name"
+              id="last-name-input" maxlength="50"  placeholder="last name" required />
             <select name="project_preference">
               <option value="daily">Daily Challenge</option>
               <option value="evening">Evening Challenge</option>
@@ -28,17 +28,17 @@
     <div class="section_containers">
       <% daily_users.each do |user| %>
         <div class="daily_users">
-          <img src="/danelson.jpg" alt="Danelson Rosa" class="img-circle img-responsive" />
+          <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
           <p class="lead">
             <%= user["first_name"] %>
             <%= user["last_name"] %>
             <small>
-              <% if user["type"] == 'Afternoon' %>
-                (a)
+              <% if user["type"] == 'Daily' %>
+                (d)
               <% elsif user["type"] == 'Evening' %>
-                (b)
+                (e)
               <% else %>
-                (c)
+                (o)
               <% end %>
             </small>
           </p>
@@ -48,9 +48,9 @@
     <div class="clear"></div>
   </div>
 
-<% end %>
 
-<% if time_to_pair? %>
+
+<% if time_to_pair? %><% end %>
 
   <div class="page_header">
     <img src="/collaboration.png" alt="Collaborators" />
@@ -64,7 +64,7 @@
     <div class="section_containers lead center">
       <% pairings.each do |pair| %>
         <div style="float: left;">
-          <img src="/kevin.jpg" alt="Kevin Larrabee" class="img-circle img-responsive" />
+          <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
           <br/>
           <%= pair["first_first_name"] %> <%= pair["first_last_name"] %>
         </div>
@@ -76,7 +76,7 @@
         </div>
 
         <div style="float: left;">
-          <img src="/kevin.jpg" alt="Kevin Larrabee" class="img-circle img-responsive" />
+          <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
           <br/>
           <%= pair["second_first_name"] %> <%= pair["second_last_name"] %>
         </div>
@@ -86,4 +86,4 @@
     </div>
   </div>
 
-<% end %>
+
