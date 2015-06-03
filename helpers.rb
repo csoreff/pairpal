@@ -23,10 +23,6 @@ def db
    end
  end
 
-def exec(sql)
-  db {|conn| conn.exec(sql)}
-end
-
 def exec_params(sql, vals)
   db {|conn| conn.exec_params(sql, vals)}
 end
@@ -98,25 +94,23 @@ def add_daily_user(user_id, pref_id)
 end
 
 def daily_users
-  sql("
+  exec_params("
     SELECT * FROM daily_users
     JOIN users ON users.id = daily_users.user_id
-    JOIN preferences ON preferences.id = daily_users.preference_id
-  ", "exec", nil)
+    JOIN preferences ON preferences.id = daily_users.preference_id", nil)
 end
 
 def get_preference_groups
-  sql("
+  exec_params("
       SELECT preference_id, user_id FROM daily_users
-      ORDER BY preference_id
-      ", 'exec', nil)
+      ORDER BY preference_id",nil)
 end
 
 def add_pairing(pref, first_user, second_user)
-  sql("
+  exec_params("
       INSERT INTO pairings (first_user_id, second_user_id, preference_id, day)
-      VALUES ('#{first_user}', '#{second_user}', '#{pref}', '#{current_day}')
-      ", 'exec', nil)
+      VALUES ($1, $2, $3, $4)",
+      [first_user, second_user, pref, current_day])
 end
 
 def set_pairings
@@ -147,17 +141,17 @@ def set_pairings
 end
 
 def clear_pairings
-  sql("DELETE FROM pairings", "exec", nil)
+  exec_params("DELETE FROM pairings", nil)
 end
 
 def clear_daily_users
-  sql("DELETE FROM daily_users", "exec", nil)
+  exec_params("DELETE FROM daily_users", nil)
 end
 
 def pairings
-  # Need to update this to reflect odd number of daily_users,
-  # where last person is stored in row with second_user_id = 0
-  sql("
+  # Update this to return odd user stored with a null second user,
+  # as row is dropped out due to 0 not matching any user_id
+  exec_params("
     SELECT
       pairings.id,
       users_first.first_name AS first_first_name,
@@ -169,20 +163,5 @@ def pairings
     JOIN users AS users_first ON users_first.id = pairings.first_user_id
     JOIN users AS users_second ON users_second.id = pairings.second_user_id
     JOIN preferences ON preferences.id = pairings.preference_id
-    ORDER BY preferences.type
-  ", "exec", nil)
-
-  # sql("
-  #   SELECT
-  #     users_first.first_name AS first_first_name,
-  #     users_first.last_name AS first_last_name,
-  #     users_second.first_name AS second_first_name,
-  #     users_second.last_name AS second_last_name,
-  #     preferences.type
-  #   FROM pairings
-  #     LEFT JOIN users AS users_first ON users_first.id = pairings.first_user_id
-  #     LEFT JOIN users AS users_second ON users_second.id = pairings.second_user_id
-  #     LEFT JOIN preferences ON preferences.id = pairings.preference_id
-  #   ORDER BY preferences.type
-  # ", "exec", nil)
+    ORDER BY preferences.type",nil)
 end
