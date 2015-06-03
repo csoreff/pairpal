@@ -1,27 +1,39 @@
-<div class="container">
-  <div class="section_containers lead center">
-
-    <% pairings.each do |pair| %>
-      <div style="float: left;">
-        <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
-        <br/>
-        <%= pair["first_first_name"] %> <%= pair["first_last_name"] %>
-      </div>
-
-      <div style="float: left;">
-          <small><%= pair["type"].downcase %></small>
-          <br/>
-          <img src="/double_arrow.png" class ="img-responsive" alt="Double arrow" />
-      </div>
-
-      <div style="float: left;">
-        <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
-        <br/>
-        <%= pair["second_first_name"] %> <%= pair["second_last_name"] %>
-      </div>
-      <div class="clear"></div>
-    <% end %>
-
-    <div class="clear"></div>
+  <div class="page_header">
+    <img src="/collaboration.png" alt="Collaborators" />
+    <h1>Pairings</h1>
+    <p class="lead">
+      Badasses unite!
+    </p>
   </div>
-</div>
+
+  <div class="section_containers">
+    <div class="section-body lead center">
+
+      <% pairings.each do |pair| %>
+        <div style="float: left;">
+          <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
+          <br/>
+          <%= pair["first_first_name"] %> <%= pair["first_last_name"] %>
+        </div>
+
+        <div style="float: left;">
+            <small><%= pair["type"].downcase %></small>
+            <br/>
+            <img src="/double_arrow.png" class ="img-responsive" alt="Double arrow" />
+        </div>
+
+        <div style="float: left;">
+          <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
+          <br/>
+          <%= pair["second_first_name"] %> <%= pair["second_last_name"] %>
+        </div>
+        <div class="clear"></div>
+      <% end %>
+
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  <a href="/clear" class="white">
+    <div class="clear-clearings"></div>
+  </a>

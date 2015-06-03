@@ -9,7 +9,7 @@
         <form action="/adduser" method="post">
           <fieldset>
             <input type="text" name="first_name"
-              id="first-name-input" maxlength="50" placeholder="first name" required autofocus />
+              id="first-name-input" maxlength="50" placeholder="first name" required />
             <input type="text" name="last_name"
               id="last-name-input" maxlength="50"  placeholder="last name" required />
             <select name="project_preference">
@@ -27,74 +27,9 @@
 <div id="buffer"></div>
 
 <% unless daily_users.count == 0 %>
-  <div class="container">
-    <div class="section_containers">
-      <h1 id="daily-users-header">Praying for a Pal...</h1>
-      <% daily_users.each do |user| %>
-        <div class="daily_users">
-          <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
-          <p class="lead">
-            <%= user["first_name"] %>
-            <%= user["last_name"] %>
-            <small>
-              <% if user["type"] == 'Daily' %>
-                (d)
-              <% elsif user["type"] == 'Evening' %>
-                (e)
-              <% else %>
-                (o)
-              <% end %>
-            </small>
-          </p>
-        </div>
-      <% end %>
-
-    </div>
-    <div class="clear"></div>
-  </div>
+  <%= erb :_daily_partials %>
 <% end %>
 
 <% unless pairings.count == 0 %>
-  <div class="page_header">
-    <img src="/collaboration.png" alt="Collaborators" />
-    <h1>Pairings</h1>
-    <p class="lead">
-      Badasses unite!
-    </p>
-  </div>
-
-  <div class="section-body">
-    <div class="section_containers lead center">
-
-      <% pairings.each do |pair| %>
-        <div style="float: left;">
-          <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
-          <br/>
-          <%= pair["first_first_name"] %> <%= pair["first_last_name"] %>
-        </div>
-
-        <div style="float: left;">
-            <small><%= pair["type"].downcase %></small>
-            <br/>
-            <img src="/double_arrow.png" class ="img-responsive" alt="Double arrow" />
-        </div>
-
-        <div style="float: left;">
-          <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
-          <br/>
-          <%= pair["second_first_name"] %> <%= pair["second_last_name"] %>
-        </div>
-        <div class="clear"></div>
-      <% end %>
-
-      <div class="clear"></div>
-    </div>
-  </div>
-
-<div class="center">
-  <a href="/clear" class="white">
-    <div class="clear-clearings">clear</div>
-  </a>
-</div>
-
+  <%= erb :_pairings %>
 <% end %>

@@ -1,3 +1,4 @@
+require "pry"
 ### WRAPPER methods
 
 def db
@@ -113,6 +114,7 @@ def set_pairings
   remaining = []
 
   groups.each do |pref_id, group|
+    # binding.pry
     group.shuffle!
     remaining << group.pop if group.count.odd?
 
@@ -127,7 +129,7 @@ def set_pairings
 
   # Uncomment below to add the remaining odd user
   # to pairings table by 'themselves' (ie paired with null user)
-  # add_pairing('3', remaining[-1], 0) if remaining.count.odd?
+  add_pairing('3', remaining[-1], 0) if remaining.count.odd?
 end
 
 def clear_pairings
@@ -139,8 +141,6 @@ def clear_daily_users
 end
 
 def pairings
-  # Update this to return odd user stored with a null second user,
-  # as row is dropped out due to 0 not matching any user_id
   exec_params("
     SELECT
       pairings.id,

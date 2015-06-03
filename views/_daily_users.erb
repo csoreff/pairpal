@@ -1,0 +1,25 @@
+<div class="section_containers">
+  <div class="section-body center">
+    <h1 id="daily-users-header">Praying for a Pal...</h1>
+    <% daily_users.each do |user| %>
+      <div class="daily_users">
+        <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
+        <p class="lead">
+          <%= user["first_name"] %>
+          <%= user["last_name"] %>
+          <small>
+            <% if user["type"] == 'Daily' %>
+              (d)
+            <% elsif user["type"] == 'Evening' %>
+              (e)
+            <% else %>
+              (o)
+            <% end %>
+          </small>
+        </p>
+      </div>
+    <% end %>
+
+  </div>
+  <div class="clear"></div>
+</div>
