@@ -1,4 +1,3 @@
-require "pry"
 ### WRAPPER methods
 
 def db
