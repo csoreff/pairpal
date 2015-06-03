@@ -27,16 +27,6 @@ def exec_params(sql, vals)
   db {|conn| conn.exec_params(sql, vals)}
 end
 
-def sql(statement, exec_type, array_items)
-  db do |conn|
-    if exec_type == "exec"
-      conn.exec(statement)
-    else
-      conn.exec_params(statement, array_items)
-    end
-  end
-end
-
 
 ### GENERAL UTILITY
 
