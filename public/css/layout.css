@@ -1,10 +1,15 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: url("/silly_smr15_copy.jpg") #1C2225 fixed;
+  background-size: cover;
+}
+#buffer {
+  width: 100%;
+  height: 200px;
+  background: none;
 }
 #header {
   font-size: 18px;
-  background: url("/silly_smr15_copy.jpg") #1C2225;
-  background-size: cover;
   text-align: center;
   height: 667px;
   color: #fff;
@@ -34,6 +39,10 @@ body {
   margin-bottom: 115px;
   padding-top: 115px;
 }
+.section-body {
+  background: #fff;
+  padding: 100px;
+}
 .daily_users {
   float: left;
   padding: 30px;
@@ -59,6 +68,11 @@ a:hover {
 h1{
   color: #FFF;
 }
+#daily-users-header {
+  color: #CBDEE6;
+  margin-bottom: 80px;
+  text-align: center;
+}
 .clear {
   clear: both;
   margin-bottom: 100px;
@@ -67,5 +81,7 @@ h1{
   text-align: center;
 }
 .default-launcher-pic {
-  border: 3px solid rgb(61, 158, 198);
+  border: 3px solid #CBDEE6;
 }
+
+
