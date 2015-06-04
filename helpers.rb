@@ -30,6 +30,12 @@ end
 
 ### GENERAL UTILITY
 
+def sanitize(params)
+  params.each do |k, v|
+    params[k].gsub!(/<|>/, '')
+  end
+end
+
 def current_day
   Time.now.to_s.slice(0..9)
 end
