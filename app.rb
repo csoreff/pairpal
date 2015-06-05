@@ -13,6 +13,8 @@ get '/' do
 end
 
 post '/adduser' do
+  sanitize(params)
+  
   first_name = params["first_name"]
   last_name = params["last_name"]
 
