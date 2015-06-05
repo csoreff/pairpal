@@ -29,6 +29,9 @@ body {
   background: #ed197b;
   text-align: center;
 }
+.pairings_container {
+  background: rgb(61, 158, 198);
+}
 .image_header span {
   font-size: 2em;
   font-weight: bold;
