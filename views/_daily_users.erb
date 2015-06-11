@@ -1,8 +1,13 @@
 <div class="section_containers pairings_container">
   <div class="section-body center">
-    <h1 id="daily-users-header">Praying for a Pal...</h1>
+    <h1 id="daily-users-header">
+      Praying for a Pal...
+    </h1>
     <% daily_users.each do |user| %>
       <div class="daily_users">
+        <div class="remove_button">
+          <a href="/remove_daily_user/<%= user["user_id"] %>">x</a>
+        </div>
         <img src="/launch.png" alt="launcher" class="img-circle img-responsive default-launcher-pic" />
         <p class="lead">
           <%= user["first_name"] %>

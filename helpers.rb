@@ -89,6 +89,13 @@ def add_daily_user(user_id, pref_id)
     VALUES ($1, $2)", [user_id, pref_id])
 end
 
+def remove_daily_user(user_id)
+  exec_params(
+    "DELETE FROM daily_users WHERE daily_users.user_id = #{user_id}",
+    nil
+  )
+end
+
 def daily_users
   exec_params("
     SELECT * FROM daily_users
@@ -119,7 +126,6 @@ def set_pairings
   remaining = []
 
   groups.each do |pref_id, group|
-    # binding.pry
     group.shuffle!
     remaining << group.pop if group.count.odd?
 

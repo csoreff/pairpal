@@ -14,7 +14,7 @@ end
 
 post '/adduser' do
   sanitize(params)
-  
+
   first_name = params["first_name"]
   last_name = params["last_name"]
 
@@ -32,6 +32,13 @@ post '/adduser' do
   end
 
   redirect '/'
+end
+
+get "/remove_daily_user/:daily_user_user_id" do
+  daily_user_user_id = params[:daily_user_user_id]
+  remove_daily_user(daily_user_user_id)
+
+  redirect "/"
 end
 
 get '/pair' do

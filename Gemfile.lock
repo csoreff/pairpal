@@ -25,3 +25,6 @@ DEPENDENCIES
   pg
   pry
   sinatra
+
+BUNDLED WITH
+   1.10.3
