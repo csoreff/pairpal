@@ -152,17 +152,5 @@ def clear_daily_users
 end
 
 def pairings
-  exec_params("
-    SELECT
-      pairings.id,
-      users_first.first_name AS first_first_name,
-      users_first.last_name AS first_last_name,
-      users_second.first_name AS second_first_name,
-      users_second.last_name AS second_last_name,
-      preferences.type
-    FROM pairings
-    JOIN users AS users_first ON users_first.id = pairings.first_user_id
-    JOIN users AS users_second ON users_second.id = pairings.second_user_id
-    JOIN preferences ON preferences.id = pairings.preference_id
-    ORDER BY preferences.type",nil)
+  exec_params("SELECT * FROM pairings_view", nil)
 end

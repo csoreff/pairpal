@@ -30,6 +30,20 @@ CREATE TABLE pairings (
   day DATE
 );
 
+CREATE VIEW pairings_view AS
+SELECT
+  pairings.id,
+  users_first.first_name AS first_first_name,
+  users_first.last_name AS first_last_name,
+  users_second.first_name AS second_first_name,
+  users_second.last_name AS second_last_name,
+  preferences.type
+FROM pairings
+  JOIN users AS users_first ON users_first.id = pairings.first_user_id
+  JOIN users AS users_second ON users_second.id = pairings.second_user_id
+  JOIN preferences ON preferences.id = pairings.preference_id
+ORDER BY preferences.type;
+
 INSERT INTO preferences (type) VALUES ('Daily');
 INSERT INTO preferences (type) VALUES ('Evening');
 INSERT INTO preferences (type) VALUES ('Other');
